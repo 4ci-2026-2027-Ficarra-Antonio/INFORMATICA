@@ -19,7 +19,7 @@ public class DistributoreBenzina{
     //set e get deposito
     public void setDeposito(double dep) {
         if (dep > 0) {
-            this.ddposito = dep;
+            this.deposito = dep;
         }
     }
 
