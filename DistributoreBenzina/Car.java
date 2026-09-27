@@ -1,7 +1,7 @@
 public class Car {
 
     //variabili di istanza
-    private double resa;
+    private double resa; //in km/L
     private double quantita;
     private double capienzaMax;
 
