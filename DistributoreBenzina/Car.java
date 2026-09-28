@@ -73,16 +73,18 @@ public class Car {
     }
 
     //metodo drive()
-    public void drive(double distanza) {
+    public boolean drive(double distanza) {
         double consumo;
 
         if (distanza > 0 && this.resa > 0) {
             consumo = distanza / this.resa;
             if (this.quantita >= consumo) {
                 this.quantita -= consumo;
-            }
+                return true;
+            } 
         }
-
+        
+        return false;
     }
 
     //metodo addGas

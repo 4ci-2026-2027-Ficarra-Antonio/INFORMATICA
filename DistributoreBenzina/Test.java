@@ -8,68 +8,112 @@ public class Test {
         final double PREZZO_INIZIALE = 2.40;
         final double LITRI_RIFORNIMENTO_DISTRIBUTORE = 10000.0;
         double importo;
-        double kmPercorsi;
+        double km;
         double carbPrima;
         double carbDopo;
         double litriEffettivi;
         double spesaEffettiva;
+        int sceltaAuto = -1;
+        int azione = -1;
+        String nomeAuto = "";
 
         //inizializzazione e creazione oggetti
         DistributoreBenzina distributore1 = new DistributoreBenzina(PREZZO_INIZIALE);
         Car auto1 = new Car(15.0, 0.0, 60.0);
         Car auto2 = new Car(12.0, 0.0, 60.0);
 
+        Car autoSelezionata = null;
+
         //rifornimento distributore
         distributore1.rifornisci(LITRI_RIFORNIMENTO_DISTRIBUTORE);
 
-        //rifornimento auto1
-        System.out.print("Inserisci l'importo per il rifornimento: ");
-        importo = sc.nextDouble();
+        while (sceltaAuto != 0) {
+            System.out.println("1. Sali su auto1;");
+            System.out.println("2. Sali su auto2;");
+            System.out.println("3. Visualizza lo stato del distributore;");
+            System.out.println("0. Esci.");
+            System.out.println("\nScegli un opzione:");
+            sceltaAuto = sc.nextInt();
 
-        carbPrima = auto1.getQuantita();
-        System.out.println("Rifornimento in corso...\n");
-        distributore1.vendi(importo, auto1);
-        carbDopo = auto1.getQuantita();
+            switch (sceltaAuto) {
+                case 0:
+                    System.out.println("\nSei uscito dal programma");
+                    break;
+                case 1:
+                    autoSelezionata = auto1;
+                    nomeAuto = "Auto 1";
+                    break;
+                case 2:           
+                    autoSelezionata = auto2;
+                    nomeAuto = "Auto 2";
+                    break;
+                case 3:
+                    System.out.println("\nStato distributore");
+                    System.out.println(distributore1.toString());
+                    break;
+                default:
+                    System.out.println("\nOpzione non valida.");
+                    break;
+            }
 
-        litriEffettivi = carbDopo - carbPrima;
-        spesaEffettiva = litriEffettivi * distributore1.getEuroPerLitro();
+            if (autoSelezionata != null) {
+                azione = -1;
+                while (azione != 0) {
+                    System.out.println("\nSei salito su " + nomeAuto);
+                    System.out.println("1. Fai rifornimento");
+                    System.out.println("2. Guida");
+                    System.out.println("3. Visualizza lo stato dell'auto");
+                    System.out.println("4. Visualizza lo stato del distributore");
+                    System.out.println("0. Scendi dall'auto (Torna al menu principale)");
+                    System.out.print("\nScegli un'azione: ");
+                    azione = sc.nextInt();
 
-        //output
-        System.out.println("Litri erogati: " + litriEffettivi + "L");
-        System.out.println("Spesa effettiva " + spesaEffettiva + " euro");
-        System.out.println("Resto: " + (importo - spesaEffettiva) + " euro");
+                    switch (azione) {
+                        case 0:
+                            System.out.println("\nScendi da " + nomeAuto);
+                            break;
+                        case 1:
+                            System.out.println("Inserisci l'importo per il rifornimento: ");
+                            importo = sc.nextDouble();
+                            carbPrima = autoSelezionata.getQuantita();
 
-        //rifornimento auto2
-        System.out.print("\nInserisci l'importo per il rifornimento: ");
-        importo = sc.nextDouble();
+                            System.out.println("Rifornimento in corso...");
+                            if (distributore1.vendi(importo, autoSelezionata)){
+                                carbDopo = autoSelezionata.getQuantita();
 
-        carbPrima = auto2.getQuantita();
-        System.out.println("Rifornimento in corso...\n");
-        distributore1.vendi(importo, auto2);
-        carbDopo = auto2.getQuantita();
+                                litriEffettivi = carbDopo - carbPrima;
+                                spesaEffettiva = litriEffettivi * distributore1.getEuroPerLitro();
 
-        litriEffettivi = carbDopo - carbPrima;
-        spesaEffettiva = litriEffettivi * distributore1.getEuroPerLitro();
-
-        //output
-        System.out.println("Litri erogati: " + litriEffettivi + "L");
-        System.out.println("Spesa effettiva " + spesaEffettiva + " euro");
-        System.out.println("Resto: " + (importo - spesaEffettiva) + " euro");
-
-        //viaggi
-        System.out.println("\nInserire Km da percorrere: ");
-        kmPercorsi = sc.nextDouble();
-        auto1.drive(kmPercorsi);
-
-        System.out.println("\nInserire Km da percorrere: ");
-        kmPercorsi = sc.nextDouble();
-        auto2.drive(kmPercorsi);
-
-        //stato finale auto1 e auto2
-        System.out.println("\nStato auto1");
-        System.out.println(auto1.toString());
-
-        System.out.println("\nStato auto2");
-        System.out.println(auto2.toString());
+                                System.out.println("Litri erogati: " + litriEffettivi + " L");
+                                System.out.println("Spesa effettiva: " + spesaEffettiva + " euro");
+                                System.out.println("Resto: " + (importo - spesaEffettiva) + " euro");
+                            } else {
+                                System.out.println("Impossibile effettuare il rifornimento.");
+                            }
+                            break;
+                        case 2:
+                            System.out.print("\nInserisci i Km da percorrere: ");
+                            km = sc.nextDouble();
+                            if(autoSelezionata.drive(km)){
+                                System.out.println("Viaggio effettuato.");
+                            } else {
+                                System.out.println("Carburante insufficiente.");
+                            }
+                            break;
+                        case 3:
+                            System.out.println("\nStato " + nomeAuto);
+                            System.out.println(autoSelezionata.toString());
+                            break;
+                        case 4:
+                            System.out.println("\nStato distributore");
+                            System.out.println(distributore1.toString());
+                            break;
+                        default:
+                            System.out.println("Scelta non valida.");
+                            break;
+                    }
+                }
+            }
+        }
     }
 }

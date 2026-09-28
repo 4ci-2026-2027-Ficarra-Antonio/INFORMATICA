@@ -46,7 +46,11 @@ public class DistributoreBenzina{
     }
 
     //metodo vendi (rifornimento ad un veicolo)
-    public void vendi(double euro, Car auto) {
+    public boolean vendi(double euro, Car auto) {
+        if (euro <= 0 || this.euroPerLitro <= 0 || this.deposito <= 0){
+            return false;
+        }
+
         //variabili metodo
         double litriTeorici = euro / euroPerLitro; 
         double spazioSerbatoio = auto.getSpazioDisponibile();
@@ -62,9 +66,13 @@ public class DistributoreBenzina{
             litriEffettivi = this.deposito;
         }
 
-        auto.addGas(litriEffettivi);
-        this.deposito -= litriEffettivi;
+        if (litriEffettivi > 0) {
+            auto.addGas(litriEffettivi);
+            this.deposito -= litriEffettivi;
+            return true;
+        }
         
+        return false;
     }
 
     public String toString() {
