@@ -1,3 +1,4 @@
+package DistributoreBenzina;
 public class Car {
 
     //variabili di istanza

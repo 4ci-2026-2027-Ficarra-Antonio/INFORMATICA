@@ -1,3 +1,4 @@
+package DistributoreBenzina;
 import java.util.Scanner;
 
 public class Test {
