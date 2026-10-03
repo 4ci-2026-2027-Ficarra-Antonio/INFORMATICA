@@ -1,0 +1,10 @@
+Conto intestato a: Mario Rossi Saldo: 500.0€
+
+Pagamento: 120.5€. Beneficiario: Amazon
+
+FALLITO: Saldo insufficiente per pagare Concessionario. 
+Saldo attuale: 379.5€. 
+Importo da pagare: 600.0€.
+
+Pagamento: 45.2€. Beneficiario: Supermercato
+Pagamento: 150.0€. Beneficiario: Bolletta Luce

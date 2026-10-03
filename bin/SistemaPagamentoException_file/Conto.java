@@ -1,4 +1,4 @@
-package SistemaPagamento;
+package SistemaPagamentoException_file;
 public class Conto {
     private String intestatario;
     private double saldo;
@@ -11,13 +11,13 @@ public class Conto {
 
     //Costruttore con parametri
     public Conto(String intest, double s) {
-        if (intestatario != null) {
+        if (intest != null) {
             this.intestatario = intest;
         } else {
             this.intestatario = "";
         }
 
-        if (saldo >= 0) {
+        if (s >= 0) {
             this.saldo = s;
         } else {
             this.saldo = 0.0;
@@ -41,30 +41,34 @@ public class Conto {
     }
 
     public void setSaldo(double s) {
-        if (saldo >= 0) {
+        if (s >= 0) {
             this.saldo = s;
         }
     }
 
-    public boolean effettuaPagamento(Pagamento pagamento) {
+    public void effettuaPagamento(Pagamento pagamento) throws SaldoInsufficienteException {
         if (pagamento == null) {
-            return false;
+            throw new IllegalArgumentException("Il pagamento non può essere vuoto");
         }
 
         double importoDaPagare = pagamento.getImporto();
 
-        if (importoDaPagare > 0 && this.saldo >= importoDaPagare) {
-            this.saldo -= importoDaPagare;
-            return true;
+        if (importoDaPagare <= 0) {
+            throw new IllegalArgumentException("L'importo del pagamento deve essere maggiore di 0");
         }
 
-        return false;
+        if (this.saldo < importoDaPagare) {
+            throw new SaldoInsufficienteException("Saldo insufficiente per pagare " + pagamento.getBeneficiario() + ". \nSaldo attuale: " + this.saldo + "€. \nImporto da pagare: " + importoDaPagare + "€.");
+        }
+
+        this.saldo -= importoDaPagare;
+        System.out.println("Pagamento effettuato. \nBeneficiario: " + pagamento.getBeneficiario() + "." + "\nImporto pagato: " + importoDaPagare + "€.\n");
     }
 
     //toString
     public String toString() {
         String output = "";
-        output += "Conto di:" + this.intestatario;
+        output += "Conto di: " + this.intestatario;
         output += "\nSaldo attuale: " + this.saldo + "€";
         return output;
     }

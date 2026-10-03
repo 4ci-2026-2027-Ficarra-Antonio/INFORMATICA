@@ -1,4 +1,4 @@
-package SistemaPagamento;
+package SistemaPagamentoException;
 public class Main {
     public static void main(String[] args) {
         Conto conto1 = new Conto("Mario Rossi", 500.00);
@@ -13,22 +13,22 @@ public class Main {
         System.out.println("\nElaborazione primo pagamento...");
         System.out.println(p1.toString());
 
-        if (conto1.effettuaPagamento(p1)) {
-            System.out.println("Pagamento effettuato con successo");
-        } else {
-            System.out.println("Impossibile effettuare il pagamento");   
+        try {
+            conto1.effettuaPagamento(p1);
+        } catch (SaldoInsufficienteException e) {
+            System.out.println("Errore: " + e.getMessage());
         }
 
         System.out.println("\nStato conto:" + conto1.toString() + "\n");
 
         //pagamento2
         System.out.println("\nElaborazione primo pagamento...");
-        System.out.println(p1.toString());
+        System.out.println(p2.toString());
 
-        if (conto1.effettuaPagamento(p2)) {
-            System.out.println("Pagamento effettuato con successo");
-        } else {
-            System.out.println("Impossibile effettuare il pagamento");   
+        try {
+            conto1.effettuaPagamento(p2);
+        } catch (SaldoInsufficienteException e) {
+            System.out.println("Errore: " + e.getMessage());
         }
 
         System.out.println("\nStato conto:" + conto1.toString() + "\n");

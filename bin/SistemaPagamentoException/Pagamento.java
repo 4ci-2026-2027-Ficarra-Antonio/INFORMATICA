@@ -1,4 +1,4 @@
-package SistemaPagamento;
+package SistemaPagamentoException;
 public class Pagamento {
     private String beneficiario;
     public double importo;

@@ -1,0 +1,4 @@
+Amazon,120.50
+Concessionario,600.00
+Supermercato,45.20
+Bolletta Luce,150.00

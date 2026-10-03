@@ -1,15 +1,20 @@
 # Documentazione SistemaPagamento
 
 ## 1. Descrizione del funzionamento
-Il codice gestisce la transazione tra un conto bancario e una richiesta di pagamento.
+Il codice gestisce la transazione tra un conto bancario e delle richieste di pagamento lette da un file di testo, gli esiti vengono salvati su un file log.
 
 1. Viene creato un conto corrente associato ad un intestatario con un saldo iniziale.
-2. Viene creato un oggetto pagamento in cui è indicato il beneficiario e l'importo del pagamento.
-3. metodo **effettuaPagamento()**:
+2. Il programma apre un file di input (`pagamenti_input.txt`) tramite le classi `File` e `Scanner` per leggere i dati riga per riga.
+3. Apre un file di log (`log_transazioni.txt`) tramite `FileWriter` e `PrintWriter` per registrare i risultati delle operazioni.
+3. Elaborazione e metodo **effettuaPagamento()**:
+    - Per ogni riga letta, il programma verifica che non sia vuota, la suddivide con il metodo ".split()" e crea un oggetto "Pagamento".
     - La classe "Conto" riceve l'oggetto "Pagamento" come parametro del metodo **effettuaPagamento()**.
-    - Il metodo controlla che l'oggetto non sia nullo e che il saldo disponibile sia maggiore o uguale all'importo del pagamento.
-    - Se il saldo è sufficiente, l'importo viene sottratto dal conto e viene restituito **true**.
-    - Se è insufficiente, il saldo non cambia e viene restituito **false**.
+    - Il metodo controlla che l'oggetto non sia nullo, che l'importo sia valido e che il saldo disponibile sufficiente.
+    - Se il saldo è sufficiente, l'importo viene sottratto dal conto e viene stampato un messaggio di conferma sul file di log.
+    - Se è insufficiente, il metodo interrompe il flusso e lancia un'eccezione  `SaldoInsufficienteException`, l'errore viene registrato sul file di log.
+4. **main**:
+    - Le operazzioni di Input e Outuput e le chiamate a `effettuaPagamento()` sono dentro delle `try-catch`.
+    - Eventuali errori (come il saldo insufficiente o la mancanza del file) vengono intercettati.
 
 ## 2. Diagramma delle classi - UML
 
@@ -24,7 +29,7 @@ Il codice gestisce la transazione tra un conto bancario e una richiesta di pagam
 | `public` | `getIntestatario()` | `String` |
 | `public` | `setSaldo(saldo: double)` | `void` |
 | `public` | `getSaldo()` | `double` |
-| `public` | `effettuaPagamento(p: Pagamento)` | `boolean` |
+| `public` | `effettuaPagamento(p: Pagamento)` | `void` |
 | `public` | `toString()` | `String` |
 
 ### Classe: "Pagamento"
@@ -40,10 +45,16 @@ Il codice gestisce la transazione tra un conto bancario e una richiesta di pagam
 | `public` | `getImporto()` | `double` |
 | `public` | `toString()` | `String` |
 
+### Classe: "SaldoInsufficienteException"
+| Visibilità | Metodo | Tipo |
+| :--- | :--- | :--- |
+| `public` | `SaldoInsufficienteException(messaggio: String)` | Costruttore (Estende exception) |
+
 ### Relazione UML
 |  |  |  |  |  |
 | :--- | :--- | :--- | :--- | :--- |
 | `Conto` | (**Dipendenza**) `--->` | `uses` | `Pagamento` |
+| `SaldoInsufficienteException` |  `--->` | `extends` | `Exception` |
 
 `Conto` utilizza un oggetto `Pagamento` come parametro del metodo `effettuaPagamento()`.
 
