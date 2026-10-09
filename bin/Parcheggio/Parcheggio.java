@@ -59,14 +59,19 @@ public class Parcheggio {
         return this.postiDisponibili;
     }
 
+    //metodo entra per entrare nel parcheggio
     public boolean entra(Car auto) {
         if (auto != null && this.postiDisponibili > 0) {
+            boolean presente = false;
+            //si controlla se l'auto è già nel parcheggio
             for (int i = 0; i < autoPresenti.size(); i++) {
                 Car c = autoPresenti.get(i);
                 if (c.uguale(auto)) {
-                    return false;
+                    presente = true;
                 }
+            }
 
+            if (!presente) {
                 this.autoPresenti.add(new Car(auto));
                 this.postiDisponibili--;
                 return true;
@@ -82,7 +87,7 @@ public class Parcheggio {
                 Car c = autoPresenti.get(i);
 
                 if (c.uguale(auto) && autoTrovata == null) {
-                    autoTrovata = auto;
+                    autoTrovata = c;
                 }
             }
 

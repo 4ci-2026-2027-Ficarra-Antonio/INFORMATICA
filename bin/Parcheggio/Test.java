@@ -18,7 +18,7 @@ public class Test {
         Parcheggio parcheggio1 = new Parcheggio(500, 1.50);
         
         do {
-            System.out.println("1. Fai entrare un'automobile");
+            System.out.println("\n1. Fai entrare un'automobile");
             System.out.println("2. Fai uscire un'automobile");
             System.out.println("3. Modifica costo orario");
             System.out.println("4. Visualizza lo stato del parcheggio");
@@ -40,7 +40,7 @@ public class Test {
                     successo = parcheggio1.entra(auto);
                      
                     if (successo) {
-                        System.out.println("L'automobile targata " + auto.getTarga() + "è entrata nel parcheggio");
+                        System.out.println("L'automobile targata " + auto.getTarga() + " è entrata nel parcheggio");
                         System.out.println("Posti rimasti: " + parcheggio1.getPostiDisponibili());
                     } else {
                         System.out.println("Errore: parcheggio pieno.");
@@ -61,7 +61,7 @@ public class Test {
                         System.out.println("Totale da pagare per " + ore + "ore: " + totalePagamento + "€");
                         System.out.println( "Posti disponibili: " + parcheggio1.getPostiDisponibili());
                     } else {
-                        System.out.println("Errore: nessuna automobile targata " + auto.getTarga() + "risulta presente nel parcheggio.");
+                        System.out.println("Errore: nessuna automobile targata " + auto.getTarga() + " risulta presente nel parcheggio.");
                     }
                     break;
 

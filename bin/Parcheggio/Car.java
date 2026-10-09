@@ -70,10 +70,11 @@ public class Car {
 
     public void setModello(String mo) {
         if (mo != null) {
-            this.marca = mo;
+            this.modello = mo;
         }
     }
 
+    //metodo per confrontare 2 auto in base alla targa
     public boolean uguale(Car auto) {
         if (auto == null) {
             return false;
