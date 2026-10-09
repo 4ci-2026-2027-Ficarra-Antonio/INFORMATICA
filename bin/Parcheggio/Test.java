@@ -58,7 +58,7 @@ public class Test {
 
                     if (totalePagamento >= 0) {
                         System.out.println("L'automobile targata " + auto.getTarga() + "è uscita dal parcheggio");
-                        System.out.println("Totale da pagare per " + ore + "ore: " + totalePagamento + "€");
+                        System.out.println("Totale da pagare per " + ore + " ore: " + totalePagamento + "€");
                         System.out.println( "Posti disponibili: " + parcheggio1.getPostiDisponibili());
                     } else {
                         System.out.println("Errore: nessuna automobile targata " + auto.getTarga() + " risulta presente nel parcheggio.");
