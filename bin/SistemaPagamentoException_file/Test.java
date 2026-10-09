@@ -1,7 +1,7 @@
 package SistemaPagamentoException_file;
 import java.io.*;
 import java.util.Scanner;
-public class Main {
+public class Test {
     public static void main(String[] args) {
         
         Conto conto1 = new Conto("Mario Rossi", 500.00);
