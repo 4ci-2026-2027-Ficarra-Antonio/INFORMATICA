@@ -62,7 +62,7 @@ public class Conto {
         }
 
         this.saldo -= importoDaPagare;
-        System.out.println("Pagamento effettuato. \nBeneficiario: " + pagamento.getBeneficiario() + "." + "\nImporto pagato: " + importoDaPagare + "€.\n");
+        
     }
 
     //toString
