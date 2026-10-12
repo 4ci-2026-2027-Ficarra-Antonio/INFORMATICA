@@ -41,6 +41,8 @@ public class Test {
 
                         try {
                             conto1.effettuaPagamento(p);
+                            System.out.println("Pagamento effettuato. \nBeneficiario: " + p.getBeneficiario() + "." ;
+                            System.out.println(""+ "\nImporto pagato: " + p.getImporto() + "€.\n");
                             pw.println("Pagamento: " + importo + "€. Beneficiario: " + beneficiario);
                         } catch (SaldoInsufficienteException e) {
                             System.out.println("Errore: " + e.getMessage() + "\n");
